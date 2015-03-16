@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MonthEndTransactions" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ff08f13f-7de7-42e8-9f37-18b6058fae2f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="Prison" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="Year" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="Month" class="java.lang.String" isForPrompting="false"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     monthendtransactions.`FixedDeposit` AS monthendtransactions_FixedDeposit,
+     monthendtransactions.`Scholorship` AS monthendtransactions_Scholorship,
+     monthendtransactions.`RegisterFee` AS monthendtransactions_RegisterFee,
+     monthendtransactions.`Loan` AS monthendtransactions_Loan,
+     monthendtransactions.`DeathGrant` AS monthendtransactions_DeathGrant,
+     monthendtransactions.`DeathGrantLoan` AS monthendtransactions_DeathGrantLoan,
+     monthendtransactions.`Total` AS monthendtransactions_Total,
+     monthendtransactions.`member_EmpNo` AS monthendtransactions_member_EmpNo,
+     member.`FirstName` AS member_FirstName,
+     member.`Prison` AS member_Prison,
+     member.`SecondName` AS member_SecondName,
+     member.`LedgerNo` AS member_LedgerNo,
+     member.`EmpNo` AS member_EmpNo
+FROM
+     `monthendtransactions` monthendtransactions 
+LEFT JOIN
+     `member` member
+ON 
+     monthendtransactions.`member_EmpNo` = member.`EmpNo`
+WHERE
+     member.`Prison` = $P{Prison}
+AND
+     monthendtransactions.`Year` = $P{Year}
+AND
+     monthendtransactions.`Month` = $P{Month}]]>
+	</queryString>
+	<field name="member_LedgerNo" class="java.lang.String"/>
+	<field name="member_FirstName" class="java.lang.String"/>
+	<field name="member_SecondName" class="java.lang.String"/>
+	<field name="member_Prison" class="java.lang.String"/>
+	<field name="monthendtransactions_FixedDeposit" class="java.lang.Float"/>
+	<field name="monthendtransactions_Scholorship" class="java.lang.Float"/>
+	<field name="monthendtransactions_RegisterFee" class="java.lang.Float"/>
+	<field name="monthendtransactions_Loan" class="java.lang.Float"/>
+	<field name="monthendtransactions_DeathGrant" class="java.lang.Float"/>
+	<field name="monthendtransactions_DeathGrantLoan" class="java.lang.Float"/>
+	<field name="monthendtransactions_Total" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<image>
+				<reportElement uuid="b8987758-9e1f-4e70-b56e-20410903c4a9" x="-20" y="0" width="595" height="64"/>
+				<imageExpression><![CDATA["wood.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="ab132d42-0cc4-4827-9710-a50515bb75e3" style="Title" x="0" y="5" width="263" height="33"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[PDMP Fund]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9f26c957-381f-40fe-a6b1-fd46df4ca027" style="SubTitle" x="63" y="39" width="200" height="22" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Month-End Transactions]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="0d9bc353-9e47-4624-8eb7-bd966d8f961b" positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="d25eac33-9e82-45eb-905f-1aa9916b086a" style="Column header" x="0" y="0" width="35" height="45"/>
+				<textElement/>
+				<text><![CDATA[Ledger No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6272c76b-c93f-42de-89e4-96235e8b39fa" style="Column header" x="35" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[First Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="da6ec99f-ce82-47e3-8793-39060f973ab7" style="Column header" x="85" y="0" width="65" height="45"/>
+				<textElement/>
+				<text><![CDATA[Second Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89682d4d-edb2-496c-bed3-37d123a311aa" style="Column header" x="150" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[Prison]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="deecaa54-9c3e-4436-b600-80ac4a2dd2f9" style="Column header" x="200" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[Fixed Deposit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a9034ed-c78f-40f3-964f-c7959a846a9b" style="Column header" x="250" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[Scholorship]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="56f53c13-d3a7-4ac1-9523-8fd7d7b14463" style="Column header" x="300" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[Register Fee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="da65fa7b-5bb5-406e-b353-28cb14d7cda0" style="Column header" x="350" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[Loan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="21412213-dda4-41f4-8961-503a1c48c9ae" style="Column header" x="400" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[Death Grant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="41122faa-bee8-4307-b04e-f02f1d735a16" style="Column header" x="450" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[Death Grant Loan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fb925f96-653b-476b-bae8-a4a9c0cf2f82" style="Column header" x="500" y="0" width="50" height="45"/>
+				<textElement/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="84b5f3b3-d3d8-4e91-92f7-54d0f14a3c2d" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="1ae7c368-2ef7-4195-b8c3-707acb734412" style="Detail" x="0" y="0" width="35" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{member_LedgerNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="99b5fa62-3957-4b8b-9cfe-77e36f94e296" style="Detail" x="35" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{member_FirstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cf6cdae0-9c98-4f42-b9e3-936a1e869bf2" style="Detail" x="85" y="0" width="65" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{member_SecondName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1bb4af88-5ac5-4777-9b92-45594d875a6b" style="Detail" x="150" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{member_Prison}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aae03147-bf44-4833-985f-56b0e5451454" style="Detail" x="200" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monthendtransactions_FixedDeposit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a7b07b47-d01c-4c07-a42a-fdb6facd6a87" style="Detail" x="250" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monthendtransactions_Scholorship}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="52a67582-72da-47e9-aa07-9bef8db3f833" style="Detail" x="300" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monthendtransactions_RegisterFee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="848ca4ec-f293-41e8-9d48-fefaffddf225" style="Detail" x="350" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monthendtransactions_Loan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5f92ac4d-772a-4495-bfab-d993f0d4dfc1" style="Detail" x="400" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monthendtransactions_DeathGrant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="873b5c92-2557-49fd-aeb2-e83c4c885459" style="Detail" x="450" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monthendtransactions_DeathGrantLoan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e59d7f11-b0a5-4b30-bd3d-321e9bf694f1" style="Detail" x="500" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monthendtransactions_Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="992f4cf3-46eb-4484-b9e2-eee25de34322" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cac135c5-012a-4fdc-a0b3-29ae64589a8a" style="Column header" x="433" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="3f11fb2a-e2f2-4978-824d-d558305b83b9" style="Column header" x="513" y="0" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="ecb2283e-5ff7-40d3-81dc-5b9e0c788402" style="Column header" x="0" y="0" width="197" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
